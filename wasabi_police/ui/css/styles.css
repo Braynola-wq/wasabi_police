@@ -1,0 +1,246 @@
+:root {
+  --camera-overlay-font: 'Orbitron', sans-serif;
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-style: normal;
+    overflow: hidden;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    display: block;
+}
+
+.camera-flash {
+  width: 100%;
+  height: 100%;
+  background: white;
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease-out;
+}
+
+.camera-overlay {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: none;
+  /* background-color: rgba(0, 0, 0, 0.1); Transparent look */
+  overflow: hidden;
+  display: none;
+  pointer-events: none;
+}
+
+
+/* Safe zone for text alignment - Padding from the edges */
+.safe-zone {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  pointer-events: none;
+  /* Make sure it's just for layout and doesn't block interactions */
+}
+
+/* Header with REC and Channel info inside the safe zone */
+.overlay-header {
+  display: flex;
+  width: 100%;
+  padding: 20px;
+  font-size: 18px;
+  justify-content: space-between;
+  color: #ffffff;
+  font-family: var(--camera-overlay-font);
+}
+
+.rec-indicator {
+  color: red;
+  font-weight: bold;
+}
+
+.rec-dot {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  20% {
+    opacity: 0;
+  }
+}
+
+/* Crosshair in the middle - PLUS STYLE */
+.crosshair {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+}
+
+.crosshair::before,
+.crosshair::after {
+  content: '';
+  position: absolute;
+  background: white;
+}
+
+.crosshair::before {
+  width: 2px;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.crosshair::after {
+  height: 2px;
+  width: 100%;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+
+.overlay-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  font-family: var(--camera-overlay-font);
+}
+
+.cam-info {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  margin-right: 30px;
+  margin-bottom: 2px;
+  padding: 5px;
+}
+
+.camera-info-text {
+  display: block;
+  color: white;
+  text-transform: uppercase;
+  margin-top: 10px;
+  margin-right: 10px;
+  padding: 5px;
+}
+
+.time-display {
+  padding: 5px;
+  margin-top: 10px;
+  margin-right: 10px;
+  padding: 5px;
+  color: white;
+  font-weight: bold;
+}
+
+/* Borders with Safe Zone */
+.camera-overlay::before,
+.camera-overlay::after {
+  content: '';
+  position: absolute;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Safe zone for top-left and bottom-right corners */
+.camera-overlay::before {
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.camera-overlay::after {
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Safe zone for optional top-right and bottom-left corners */
+.camera-overlay .border-corner {
+  position: absolute;
+}
+
+.camera-overlay .border-corner.top-right {
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.camera-overlay .border-corner.bottom-left {
+  bottom: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  border-right: none;
+  border-top: none;
+}
+
+/* Place the REC and time displays inside the safe zone */
+.rec-indicator,
+.time-display,
+.channel-display {
+  margin-top: 10px;
+  margin-left: 10px;
+  padding: 5px;
+  pointer-events: none;
+  transition: opacity 0.5s ease-out;
+}
+
+.jail-counter {
+    color: #fff;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    border-radius: 14px;
+    top: 2%;
+    left: 50%;
+    padding: 14px;
+    transform: translateX(-50%) !important;
+    pointer-events: none;
+    transition: opacity 0.5s ease-out;
+    letter-spacing: 5px;
+    font-size: 1.2em;
+}
+
+.jail-counter .heading {
+    font-size: 1.2em;
+    letter-spacing: 10px;
+    width: 100%;
+    font-weight: bold;
+}
+
+.jail-counter .seperator {
+    width: 100%;
+    height: 1px;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, transparent, #ffffff80, transparent);
+    margin: 2px 0;
+}
+
+.jail-counter .sentence {
+    font-size: 0.75em;
+    font-weight: normal;
+}
